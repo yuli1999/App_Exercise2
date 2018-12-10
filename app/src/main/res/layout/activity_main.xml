@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.umeng.soexample.app_exercise.customize.ViewPagerSlide
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:paddingTop="5dp"
+        android:background="@mipmap/rectangle6"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/bt_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-5dp"
+            android:layout_marginTop="32dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/home_bt"
+            android:gravity="center" />
+
+        <RadioButton
+            android:id="@+id/bt_circle"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="-5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/circle_bt" />
+
+        <RadioButton
+            android:id="@+id/bt_car"
+            android:layout_width="wrap_content"
+            android:layout_height="85dp"
+            android:layout_weight="1"
+            android:background="@mipmap/commom_tab_btn_shoppingcart_n_hdpi"
+            android:button="@null" />
+
+        <RadioButton
+            android:id="@+id/bt_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/list_bt" />
+
+        <RadioButton
+            android:id="@+id/bt_my"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/my_bt" />
+    </RadioGroup>
+
+
+</RelativeLayout>
