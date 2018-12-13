@@ -28,13 +28,13 @@ public class HttpNet {
     private static final Gson gson = new Gson();
     private static OkHttpClient okHttpClient;
 
-    public static void init(Map headers) {
+    public static void init() {
        // HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         //interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(3000, TimeUnit.MILLISECONDS);
-        builder.addInterceptor(new OKHeaderInterceptor(headers));//添加请求头
-        builder.addInterceptor(new OkLogInterceptor());//打印log
+//        builder.addInterceptor(new OKHeaderInterceptor());//添加请求头
+//        builder.addInterceptor(new OkLogInterceptor());//打印log
         okHttpClient = builder.build();
     }
 

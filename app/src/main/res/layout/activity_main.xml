@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.umeng.soexample.app_exercise.customize.ViewPagerSlide
-        android:id="@+id/vp"
+    <FrameLayout
+        android:id="@+id/fragmentlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <com.umeng.soexample.app_exercise.customize.ViewPagerSlide
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
 
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:paddingTop="5dp"
-        android:background="@mipmap/rectangle6"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:background="@mipmap/rectangle6"
+        android:backgroundTint="#0d000000"
+        android:backgroundTintMode="add"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
 
         <RadioButton
             android:id="@+id/bt_home"
@@ -34,8 +46,8 @@
         <RadioButton
             android:id="@+id/bt_circle"
             android:layout_width="wrap_content"
-            android:layout_marginLeft="-5dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="-5dp"
             android:layout_marginTop="30dp"
             android:layout_weight="1"
             android:button="@null"
@@ -43,8 +55,8 @@
 
         <RadioButton
             android:id="@+id/bt_car"
-            android:layout_width="wrap_content"
-            android:layout_height="85dp"
+            android:layout_width="50dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
             android:background="@mipmap/commom_tab_btn_shoppingcart_n_hdpi"
             android:button="@null" />
@@ -69,4 +81,4 @@
     </RadioGroup>
 
 
-</RelativeLayout>
+</LinearLayout>

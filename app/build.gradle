@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.umeng.soexample.app_exercise"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -30,7 +30,6 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     implementation 'com.android.support:recyclerview-v7:27.1.0'
-    implementation 'com.chenlittleping:recyclercoverflow:1.0.6'
     //Fresco
     implementation 'com.facebook.fresco:fresco:1.9.0'
     // 支持 GIF 动图，需要添加
@@ -38,4 +37,23 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     implementation 'com.orhanobut:logger:2.2.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    //轮播图
+    implementation 'com.github.pinguo-zhouwei:MZBannerView:v2.0.2'
+
+    //Rxjava2需要依赖
+    implementation 'io.reactivex.rxjava2:rxjava:+'
+    implementation 'io.reactivex.rxjava2:rxandroid:+'
+
+    //让retrofit支持Rxjava2
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:+'
+
+    //配置retrofit2.0
+    implementation 'com.squareup.retrofit2:retrofit:+'
+    implementation 'com.squareup.retrofit2:converter-gson:+'
+
+    //eventbas
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    //圆形图片
+    implementation 'de.hdodenhof:circleimageview:2.0.0'
+
 }

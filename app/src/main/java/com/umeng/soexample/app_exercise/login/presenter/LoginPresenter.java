@@ -1,5 +1,6 @@
 package com.umeng.soexample.app_exercise.login.presenter;
 
+import com.umeng.soexample.app_exercise.login.bean.LoginBean;
 import com.umeng.soexample.app_exercise.login.callback.HttpCallback;
 import com.umeng.soexample.app_exercise.login.model.Login_Model;
 import com.umeng.soexample.app_exercise.login.view.Login_View;
@@ -22,8 +23,9 @@ public class LoginPresenter {
     public void login(String phone, String pwd) {
         login_model.login(phone, pwd, new HttpCallback() {
             @Override
-            public void OnSuccess(String result) {
-                login_view.OnSuccess(result);
+            public void OnSuccess(Object result) {
+                LoginBean data = (LoginBean) result;
+                login_view.OnSuccess(data);
             }
 
             @Override

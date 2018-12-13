@@ -2,6 +2,7 @@ package com.umeng.soexample.app_exercise.login.model;
 
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.umeng.soexample.app_exercise.interFace.Util;
@@ -51,7 +52,8 @@ public class Login_Model {
                     @Override
                     public void run() {
                         if (login_bean.getStatus().equals("0000")) {
-                            httpCallback.OnSuccess(login_bean.getMessage());
+//                            Log.i("userid",""+login_bean.getResult().getUserId());
+                            httpCallback.OnSuccess(login_bean);
                         } else {
                             httpCallback.OnFaile(login_bean.getMessage());
                         }

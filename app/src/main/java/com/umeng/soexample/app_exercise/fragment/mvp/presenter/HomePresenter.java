@@ -21,12 +21,29 @@ public class HomePresenter {
         homeModel = new HomeModel();
     }
 
+
+    //轮播图
+    public void bann() {
+        homeModel.bann(new HomeCallBack() {
+            @Override
+            public void onSuccess(List data) {
+                homeView.bann(data);
+            }
+
+            @Override
+            public void onFaile(String msg) {
+                homeView.onFaile(msg);
+            }
+        });
+    }
+
+
     //第一个
     public void reone() {
         homeModel.reone(new HomeCallBack() {
             @Override
             public void onSuccess(List data) {
-                homeView.onSuccess(data);
+                homeView.onOne(data);
             }
 
             @Override
@@ -50,8 +67,9 @@ public class HomePresenter {
             }
         });
     }
+
     //第三个
-    public void rethree(){
+    public void rethree() {
         homeModel.rethree(new HomeCallBack() {
             @Override
             public void onSuccess(List data) {
@@ -64,7 +82,6 @@ public class HomePresenter {
             }
         });
     }
-
 
 
 }

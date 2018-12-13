@@ -10,7 +10,9 @@ import java.util.List;
  * function:
  */
 public interface HomeView {
-    void onSuccess(List data);
+    void bann(List data);
+
+    void onOne(List data);
 
     void onTwo(List data);
 

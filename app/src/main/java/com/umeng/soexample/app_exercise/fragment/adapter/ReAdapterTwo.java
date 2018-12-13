@@ -3,6 +3,7 @@ package com.umeng.soexample.app_exercise.fragment.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -33,14 +34,14 @@ public class ReAdapterTwo extends RecyclerView.Adapter<ReAdapterTwo.MyViewHolder
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.re_two_item, null);
+//        View view = View.inflate(context, R.layout.re_two_item, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.re_two_item, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-//        Glide.with(context).load(list.get(position).getMasterPic()).into(holder.mpic);
         holder.mpic.setImageURI(list.get(position).getMasterPic());
         holder.mcount.setText(list.get(position).getCommodityName());
         holder.money.setText("￥" + list.get(position).getPrice() + "");

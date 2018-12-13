@@ -16,22 +16,22 @@ import java.util.HashMap;
  * author: HJL (磊)
  * function:
  */
-public class App extends Application{
+public class App extends Application {
     public static Context sContext;
+
     @Override
     public void onCreate() {
         super.onCreate();
+
         LoggerUtil.init();
 
-        Fresco.initialize(this);
-        initHttpHeader();
+        Fresco.initialize(this);//Fresco初始化
+
+        HttpNet.init(); //Okhttp3 初始化
+
+        sContext = this;
+
+
     }
 
-    private void initHttpHeader() {
-        HashMap<String, String> header = new HashMap<>();
-        SharedPreferences sharedPreferences = getSharedPreferences("sp_name",MODE_PRIVATE);
-        header.put("sessionId",sharedPreferences.getString("token",""));
-        header.put("userId",sharedPreferences.getString("user_id",""));
-        HttpNet.init(header);
-    }
 }

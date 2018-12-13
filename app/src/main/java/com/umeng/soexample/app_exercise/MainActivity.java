@@ -4,17 +4,24 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 
 import com.umeng.soexample.app_exercise.customize.ViewPagerSlide;
+import com.umeng.soexample.app_exercise.event.FirstEvent;
+import com.umeng.soexample.app_exercise.event.FirstFragment;
+import com.umeng.soexample.app_exercise.event.HomeEvent;
 import com.umeng.soexample.app_exercise.fragment.FragmentCar;
 import com.umeng.soexample.app_exercise.fragment.FragmentCircle;
 import com.umeng.soexample.app_exercise.fragment.FragmentHome;
 import com.umeng.soexample.app_exercise.fragment.FragmentMy;
 import com.umeng.soexample.app_exercise.fragment.FragmentOrder;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Fragment> fragments = new ArrayList<>();
 
+    private FragmentManager mFragmentManager;
+    private FragmentTransaction transaction;
+    private FirstFragment firstFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +66,34 @@ public class MainActivity extends AppCompatActivity {
         MyPageAdapter adapter = new MyPageAdapter(getSupportFragmentManager());
         mVp.setAdapter(adapter);
 
+        mFragmentManager = getSupportFragmentManager();
+        EventBus.getDefault().register(this);
+        mVp.setOffscreenPageLimit(4);
 
     }
+
+    //****************Eventbas
+
+    //跳过去
+    @Subscribe
+    public void eventFirst(FirstEvent event) {
+        transaction = mFragmentManager.beginTransaction();
+        transaction.add(R.id.fragmentlayout, new FirstFragment(), "first");
+        transaction.addToBackStack("first");//返回键返回
+        transaction.commit();
+    }
+
+    //返回
+    @Subscribe
+    public void SecondEvent(HomeEvent event) {
+        transaction = mFragmentManager.beginTransaction();
+        Fragment first = mFragmentManager.findFragmentByTag("first");
+        transaction.hide(first);
+        transaction.remove(first);
+        transaction.commit();
+
+    }
+
 
     @OnClick({R.id.bt_home, R.id.bt_circle, R.id.bt_car, R.id.bt_order, R.id.bt_my})
     public void onClick(View v) {
@@ -100,5 +137,12 @@ public class MainActivity extends AppCompatActivity {
         public void destroyItem(ViewGroup container, int position, Object object) {
 //            super.destroyItem(container, position, object);
         }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 }
