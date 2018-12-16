@@ -23,7 +23,9 @@
         <activity android:name=".register.RegisterActivity" />
         <activity android:name=".user.information.UserActivity" />
         <activity android:name=".user.information.InformActivity" />
-        <activity android:name=".user.DropActivity"></activity>
+        <activity android:name=".user.DropActivity" />
+        <activity android:name=".user.circle.CircleActivity" />
+        <activity android:name=".user.footprint.FootActivity"></activity>
     </application>
 
 </manifest>

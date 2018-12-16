@@ -15,6 +15,9 @@ import android.widget.Toast;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.umeng.soexample.app_exercise.R;
 import com.umeng.soexample.app_exercise.event.FirstEvent;
+import com.umeng.soexample.app_exercise.event.PassEvent;
+import com.umeng.soexample.app_exercise.event.SecondEvent;
+import com.umeng.soexample.app_exercise.event.ThirdEvent;
 import com.umeng.soexample.app_exercise.fragment.bean.BannBean;
 import com.umeng.soexample.app_exercise.fragment.bean.ReOneBean;
 import com.umeng.soexample.app_exercise.fragment.mvp.presenter.HomePresenter;
@@ -64,7 +67,6 @@ public class HomeReAdapter extends RecyclerView.Adapter implements HomeView {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == 0) {
             View view = View.inflate(context, R.layout.bann_item, null);
-//            View view = LayoutInflater.from(context).inflate(R.layout.bann_item, parent, false);
             myViewHolderbanner = new MyViewHolderbanner(view);
             return myViewHolderbanner;
         } else if (viewType == 1) {
@@ -72,12 +74,11 @@ public class HomeReAdapter extends RecyclerView.Adapter implements HomeView {
             myViewHolderOne = new MyViewHolderOne(view);
             return myViewHolderOne;
         } else if (viewType == 2) {
-//            View view = View.inflate(context, R.layout.re_two, null);
             View view = LayoutInflater.from(context).inflate(R.layout.re_two, parent, false);
             myViewHolderTwo = new MyViewHolderTwo(view);
             return myViewHolderTwo;
         } else if (viewType == 3) {
-            View view = LayoutInflater.from(context).inflate(R.layout.re_one, parent, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.re_three, parent, false);
             myViewHolderThree = new MyViewHolderThree(view);
             return myViewHolderThree;
         }
@@ -135,9 +136,8 @@ public class HomeReAdapter extends RecyclerView.Adapter implements HomeView {
         myViewHolderOne.monejump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "啦啦啦", Toast.LENGTH_SHORT).show();
                 EventBus.getDefault().post(new FirstEvent());
-
+//                EventBus.getDefault().postSticky(new PassEvent(onelist.get(0).getId()));
             }
         });
     }
@@ -153,17 +153,33 @@ public class HomeReAdapter extends RecyclerView.Adapter implements HomeView {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         myViewHolderTwo.mtwore.setLayoutManager(linearLayoutManager);
+
+        myViewHolderTwo.mtwojummp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().post(new SecondEvent());
+            }
+        });
+
+
     }
 
     @Override
     public void onThree(List data) {
         threelist.addAll(data);
-        myViewHolderThree.monetitle.setText(threelist.get(0).getName());
+        myViewHolderThree.mthreetitle.setText(threelist.get(0).getName());
         List<ReOneBean.ResultBean.MlssBean.CommodityListBeanXX> commodityList = threelist.get(0).getCommodityList();
-        ReAdapterThree reAdapterThree = new ReAdapterThree(context, commodityList);
-        myViewHolderThree.monere.setAdapter(reAdapterThree);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2);
-        myViewHolderThree.monere.setLayoutManager(gridLayoutManager);
+        ReAdapterThree reAdapterThree = new ReAdapterThree(context, commodityList);//适配器
+        myViewHolderThree.mthreeere.setAdapter(reAdapterThree);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2);//布局
+        myViewHolderThree.mthreeere.setLayoutManager(gridLayoutManager);
+
+        myViewHolderThree.mthreejump.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().post(new ThirdEvent());
+            }
+        });
 
     }
 
@@ -202,23 +218,27 @@ public class HomeReAdapter extends RecyclerView.Adapter implements HomeView {
     public class MyViewHolderTwo extends RecyclerView.ViewHolder {
         TextView mtwotitle;
         RecyclerView mtwore;
+        ImageView mtwojummp;
 
         public MyViewHolderTwo(View itemView) {
             super(itemView);
             mtwotitle = itemView.findViewById(R.id.two_title);
             mtwore = itemView.findViewById(R.id.two_re);
+            mtwojummp = itemView.findViewById(R.id.two_jump);
         }
     }
 
     //第三个
     public class MyViewHolderThree extends RecyclerView.ViewHolder {
-        TextView monetitle;
-        RecyclerView monere;
+        TextView mthreetitle;
+        RecyclerView mthreeere;
+        ImageView mthreejump;
 
         public MyViewHolderThree(View itemView) {
             super(itemView);
-            monetitle = itemView.findViewById(R.id.one_title);
-            monere = itemView.findViewById(R.id.one_re);
+            mthreetitle = itemView.findViewById(R.id.three_title);
+            mthreeere = itemView.findViewById(R.id.three_re);
+            mthreejump = itemView.findViewById(R.id.three_jump);
         }
     }
 

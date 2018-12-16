@@ -99,21 +99,25 @@ public class LoginActivity extends AppCompatActivity implements Login_View {
         mLoginBt = findViewById(R.id.login_bt);
     }
 
-
+    //成功
     @SuppressLint("ApplySharedPref")
     @Override
     public void OnSuccess(LoginBean result) {
         Toast.makeText(this, result.getMessage(), Toast.LENGTH_SHORT).show();
+
+        //初始化sp
         SharedPreferences user = getSharedPreferences("user", MODE_PRIVATE);
+        //添加数据
         SharedPreferences.Editor edit = user.edit();
 
+        //存值
         edit.putString("headPic", result.getResult().getHeadPic())
                 .putString("nickName", result.getResult().getNickName())
                 .putString("sessionId", result.getResult().getSessionId())
                 .putInt("userId", result.getResult().getUserId())
                 .putBoolean("login", false)
                 .commit();
-        finish();
+        finish();//关闭当前页
     }
 
     @Override

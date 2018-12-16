@@ -32,7 +32,7 @@ public class ReAdapterThree extends RecyclerView.Adapter<ReAdapterThree.MyViewHo
     @Override
 
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.re_one_item, null);
+        View view = View.inflate(context, R.layout.re_three_item, null);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
     }
@@ -57,9 +57,9 @@ public class ReAdapterThree extends RecyclerView.Adapter<ReAdapterThree.MyViewHo
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            mpic = itemView.findViewById(R.id.one_img);
-            mcount = itemView.findViewById(R.id.one_count);
-            money = itemView.findViewById(R.id.one_money);
+            mpic = itemView.findViewById(R.id.three_img);
+            mcount = itemView.findViewById(R.id.three_count);
+            money = itemView.findViewById(R.id.three_money);
         }
     }
 }

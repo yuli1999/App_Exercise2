@@ -12,6 +12,11 @@
         android:layout_margin="10dp"
         android:background="@mipmap/back" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11111111111111111111111" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/label_re"
         android:layout_width="match_parent"

@@ -25,9 +25,11 @@ public class OKHeaderInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
+        //存值
         SharedPreferences user = App.sContext.getSharedPreferences("user", Context.MODE_PRIVATE);
         String sessionId = user.getString("sessionId", "");
         int userId = user.getInt("userId", 0);
+        //添加请求头
         Request request = chain.request();
         Request.Builder builder = request.newBuilder();
         builder.addHeader("sessionId",sessionId);
@@ -37,6 +39,9 @@ public class OKHeaderInterceptor implements Interceptor {
         request = builder.build();
         return chain.proceed(request);
     }
+
+
+
 
 
 }

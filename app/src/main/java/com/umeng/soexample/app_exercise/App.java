@@ -17,6 +17,7 @@ import java.util.HashMap;
  * function:
  */
 public class App extends Application {
+
     public static Context sContext;
 
     @Override

@@ -17,6 +17,9 @@ import com.bumptech.glide.Glide;
 import com.umeng.soexample.app_exercise.App;
 import com.umeng.soexample.app_exercise.R;
 import com.umeng.soexample.app_exercise.login.LoginActivity;
+import com.umeng.soexample.app_exercise.user.DropActivity;
+import com.umeng.soexample.app_exercise.user.circle.CircleActivity;
+import com.umeng.soexample.app_exercise.user.footprint.FootActivity;
 import com.umeng.soexample.app_exercise.user.information.InformActivity;
 import com.umeng.soexample.app_exercise.user.information.InformBean;
 import com.umeng.soexample.app_exercise.user.information.mvp.InformPresenter;
@@ -65,23 +68,14 @@ public class FragmentMy extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mMyHeadPic.setOnClickListener(new View.OnClickListener() {
+        //调到登录,注册,退出登录页面
+        mNickname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                Intent intent = new Intent(getActivity(), DropActivity.class);
                 startActivity(intent);
             }
         });
-
-        user = App.sContext.getSharedPreferences("user", Context.MODE_PRIVATE);
-        String headPic = user.getString("headPic", "");
-        String nickName = user.getString("nickName", "");
-        login = user.getBoolean("login", true);
-
-        Glide.with(getActivity()).load(headPic).into(mMyHeadPic);
-        mNickname.setText(nickName);
-
-
     }
 
     @Override
@@ -96,6 +90,7 @@ public class FragmentMy extends Fragment {
             default:
                 break;
             case R.id.my_inform:
+                //判断登录状态
                 if (!login) {
                     Intent intent = new Intent(getActivity(), InformActivity.class);
                     startActivity(intent);
@@ -104,8 +99,23 @@ public class FragmentMy extends Fragment {
                 }
                 break;
             case R.id.my_Circle:
+                if (!login) {
+                    Intent intent = new Intent(getActivity(), CircleActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
+                }
+
+
                 break;
             case R.id.my_foot:
+                if (!login) {
+                    Intent intent = new Intent(getActivity(), FootActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
             case R.id.my_wallet:
                 break;
@@ -114,5 +124,23 @@ public class FragmentMy extends Fragment {
         }
     }
 
+    //重启
+    //刷新页面
+    @Override
+    public void onResume() {
+        super.onResume();
+        //sp中取值
+        user = App.sContext.getSharedPreferences("user", Context.MODE_PRIVATE);
+        String headPic = user.getString("headPic", "");
+        String nickName = user.getString("nickName", "");
+        login = user.getBoolean("login", true);
 
+        if (!login) {
+            Glide.with(getActivity()).load(headPic).into(mMyHeadPic);
+            mNickname.setText(nickName);
+        } else {
+            mMyHeadPic.setImageResource(R.mipmap.myhead);
+            mNickname.setText("登录/注册");
+        }
+    }
 }

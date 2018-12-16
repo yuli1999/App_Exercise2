@@ -36,6 +36,7 @@ public class RetrofitUtil {
                 .build();
     }
 
+    //双层锁
     public static RetrofitUtil getInsetance() {
         if (insetance == null) {
             synchronized (RetrofitUtil.class) {

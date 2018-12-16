@@ -14,6 +14,13 @@ import com.umeng.soexample.app_exercise.customize.ViewPagerSlide;
 import com.umeng.soexample.app_exercise.event.FirstEvent;
 import com.umeng.soexample.app_exercise.event.FirstFragment;
 import com.umeng.soexample.app_exercise.event.HomeEvent;
+import com.umeng.soexample.app_exercise.event.HomeEvent2;
+import com.umeng.soexample.app_exercise.event.HomeEvent3;
+import com.umeng.soexample.app_exercise.event.PassEvent;
+import com.umeng.soexample.app_exercise.event.SecondEvent;
+import com.umeng.soexample.app_exercise.event.SecondFragment;
+import com.umeng.soexample.app_exercise.event.ThirdEvent;
+import com.umeng.soexample.app_exercise.event.ThirdFragment;
 import com.umeng.soexample.app_exercise.fragment.FragmentCar;
 import com.umeng.soexample.app_exercise.fragment.FragmentCircle;
 import com.umeng.soexample.app_exercise.fragment.FragmentHome;
@@ -74,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
     //****************Eventbas
 
-    //跳过去
+    //跳过去弹出页面
+    //一更多
     @Subscribe
     public void eventFirst(FirstEvent event) {
         transaction = mFragmentManager.beginTransaction();
@@ -83,15 +91,54 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    //返回
+
+    //一返回
     @Subscribe
-    public void SecondEvent(HomeEvent event) {
+    public void HomeEvent(HomeEvent event) {
         transaction = mFragmentManager.beginTransaction();
         Fragment first = mFragmentManager.findFragmentByTag("first");
         transaction.hide(first);
         transaction.remove(first);
         transaction.commit();
 
+    }
+
+    //二
+    @Subscribe
+    public void evenSecond(SecondEvent event) {
+        FragmentTransaction transaction2 = mFragmentManager.beginTransaction();
+        transaction2.add(R.id.fragmentlayout, new SecondFragment(), "second");
+        transaction2.addToBackStack("second");
+        transaction2.commit();
+    }
+
+    //二返回
+    @Subscribe
+    public void HomeEvent2(HomeEvent2 event2) {
+        FragmentTransaction transaction2 = mFragmentManager.beginTransaction();
+        Fragment second = mFragmentManager.findFragmentByTag("second");
+        transaction2.hide(second);
+        transaction2.remove(second);
+        transaction2.commit();
+    }
+
+    //三
+    @Subscribe
+    public void eventThird(ThirdEvent event) {
+        FragmentTransaction transaction3 = mFragmentManager.beginTransaction();
+        transaction3.add(R.id.fragmentlayout, new ThirdFragment(), "third");
+        transaction3.addToBackStack("third");
+        transaction3.commit();
+    }
+
+    //
+    @Subscribe
+    public void HomeEvent3(HomeEvent3 event3) {
+        FragmentTransaction transaction3 = mFragmentManager.beginTransaction();
+        Fragment third = mFragmentManager.findFragmentByTag("third");
+        transaction3.hide(third);
+        transaction3.remove(third);
+        transaction3.commit();
     }
 
 
